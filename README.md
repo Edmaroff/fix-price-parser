@@ -84,4 +84,3 @@ venv\Scripts\activate</code></pre>
     <pre><code>docker-compose up</code></pre>
   </li>
 </ol>
----
