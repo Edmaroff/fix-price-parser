@@ -1,0 +1,12 @@
+services:
+  fix-price-parser:
+    build: .
+    container_name: fix_price_parser
+    volumes:
+      - ./output:/app/output
+    command: scrapy crawl fix_price
+    environment:
+      - PROXY_LOGIN=${PROXY_LOGIN:-}
+      - PROXY_PASSWORD=${PROXY_PASSWORD:-}
+      - PROXY_IP=${PROXY_IP:-}
+      - PROXY_PORT=${PROXY_PORT:-}

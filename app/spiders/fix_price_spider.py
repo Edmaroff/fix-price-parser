@@ -1,16 +1,12 @@
-import os
 import re
 import time
 from typing import Dict, Optional, Union
 
 import scrapy
-from dotenv import load_dotenv
 from scrapy.http import HtmlResponse, TextResponse
 
 from app.items import ProductItem
-from app.settings import ALLOWED_DOMAINS, COOKIES, START_URLS
-
-load_dotenv()
+from app.settings import ALLOWED_DOMAINS, COOKIES, PROXY_ADDRESS, START_URLS
 
 
 class FixPriceSpider(scrapy.Spider):
@@ -22,21 +18,7 @@ class FixPriceSpider(scrapy.Spider):
     def start_requests(self):
         """
         Генерация начальных запросов с опциональной настройкой прокси
-        Если переменные окружения для прокси заданы, запросы будут идти через прокси
         """
-        # Проверка на наличие переменных окружения для прокси
-        proxy_user = os.getenv("PROXY_LOGIN")
-        proxy_pass = os.getenv("PROXY_PASSWORD")
-        proxy_host = os.getenv("PROXY_IP")
-        proxy_port = os.getenv("PROXY_PORT")
-
-        # Настройка прокси-адреса, если все переменные окружения заданы
-        proxy_address = (
-            f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
-            if all([proxy_user, proxy_pass, proxy_host, proxy_port])
-            else None
-        )
-
         cookies = COOKIES  # Задаем куки для Екатеринбурга
 
         # Генерация запросов на каждую начальную страницу
@@ -48,8 +30,8 @@ class FixPriceSpider(scrapy.Spider):
             )
 
             # Устанавливаем прокси, если он задан
-            if proxy_address:
-                request.meta["proxy"] = proxy_address
+            if PROXY_ADDRESS:
+                request.meta["proxy"] = PROXY_ADDRESS
 
             yield request
 

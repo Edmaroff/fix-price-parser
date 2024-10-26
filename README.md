@@ -42,7 +42,7 @@
 
 <hr>
 
-<h2>Запуск проекта</h2>
+<h2>Запуск локально</h2>
 <ol>
   <li>Клонируйте репозиторий:
     <pre><code>git clone https://github.com/Edmaroff/fix-price-parser</code></pre>
@@ -58,7 +58,7 @@ venv\Scripts\activate</code></pre>
     <pre><code>pip install -r requirements.txt</code></pre>
   </li>
   <li>Настройка Proxy <em>(опционально)</em>:
-    <p>Если требуется использовать прокси, добавьте файл <code>.env</code> и заполните его, используя <code>.env_example</code> как шаблон.</p>
+    <p>Если требуется использовать proxy, добавьте файл <code>.env</code> и заполните его, используя <code>.env_example</code> как шаблон.</p>
   </li>
   <li>Запустите парсер:
     <pre><code>scrapy crawl fix_price</code></pre>
@@ -66,4 +66,22 @@ venv\Scripts\activate</code></pre>
   </li>
 </ol>
 
+<h2>Запуск с Docker</h2>
+<ol>
+  <li>Клонируйте репозиторий:
+    <pre><code>git clone https://github.com/Edmaroff/fix-price-parser</code></pre>
+  </li>
+  <li>Перейдите в директорию проекта:
+    <pre><code>cd fix-price-parser</code></pre>
+  </li>
+  <li>Настройка Proxy <em>(опционально)</em>:
+    <p>Если требуется использовать proxy, добавьте файл <code>.env</code> и заполните его, используя <code>.env_example</code> как шаблон.</p>
+  </li>
+  <li>Соберите Docker-образ:
+    <pre><code>docker-compose build</code></pre>
+  </li>
+  <li>Запустите контейнеры:
+    <pre><code>docker-compose up</code></pre>
+  </li>
+</ol>
 ---

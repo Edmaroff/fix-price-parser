@@ -1,3 +1,7 @@
+import os
+
+from dotenv import load_dotenv
+
 # Название и модули проекта
 BOT_NAME = "app"
 SPIDER_MODULES = ["app.spiders"]
@@ -25,6 +29,20 @@ COOKIES = {
     "1%80%D0%B3%22%2C%22cityId%22%3A55%2C%22longitude%22%3A60.597474%2C%22latitude%22"
     "%3A56.838011%2C%22prefix%22%3A%22%D0%B3%22%7D"
 }
+
+# Настройки Proxy
+load_dotenv()
+
+PROXY_USER = os.getenv("PROXY_LOGIN")
+PROXY_PASSWORD = os.getenv("PROXY_PASSWORD")
+PROXY_IP = os.getenv("PROXY_IP")
+PROXY_PORT = os.getenv("PROXY_PORT")
+
+PROXY_ADDRESS = (
+    f"http://{PROXY_USER}:{PROXY_PASSWORD}@{PROXY_IP}:{PROXY_PORT}"
+    if all([PROXY_USER, PROXY_PASSWORD, PROXY_IP, PROXY_PORT])
+    else None
+)
 
 # Логирование
 LOG_LEVEL = "INFO"  # INFO для стандартных логов
